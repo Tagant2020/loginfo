@@ -1,0 +1,21 @@
+				<div name='connexion' class="panel panel-primary col-xs-12 col-lg-12 col-sm-12 col-md-12">
+					<div class="panel-heading">
+						<h4><center><span class='langue'>Connexion</span></br><span style="font-size:0.8em;color:red" class='langue' id='error_connect'></span></center></h4>
+					</div>
+					<div class="panel-body">
+						<form action ="#" data-url="https://www.findtagant.online/loginfo_doc/controleur/connexion.php" method="post" id="form_connexion">
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Votre nom</span><span class="obligatoire"></span>:</span>
+								<input type="text" class="form-control inputfr" name="nom" placeholder="Ex: Tagant" minlength="2" required>
+							</div>
+						
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Mot de passe</span><span class="obligatoire"></span>:</span>
+								<input type="password" class="form-control invisibless mdp" required name="mdp"> 
+								<span class="input-group-addon affichermdp" style='cursor:pointer'><span class='glyphicon glyphicon-eye-close'></span></span> 
+							</div>
+							<button type ="submit" class="btn btn-success langue"><span class="glyphicon glyphicon-ok-sign"></span> Connexion</button>
+							<input type="reset" class="reseteur" style="display:none">
+						</form>
+					</div>
+				</div>

@@ -1,0 +1,33 @@
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" name='suggestions'>
+					<h4 style="color:orange">
+						<center>
+							<span class='langue'>Envoyez nous vos suggestions</span><br><br>
+							<div class="pull-left style='color:white' retour" name="accueil"><span style="color:white" class='langue'>	<-- retour</span></div><br><br>
+							<span style="font-size:0.6em;color:white" class='langue'>
+								(Hé les gars et les go envoyez des avis utiles pour ameliorer cette application ou le mode de vie en entreprise <img height='35em' width='35em' src='images/clin_doeil.jpg'>  .)
+							</span>
+						<center>
+					</h4><br>
+					<form action ="#" data-url="model/message.php" method="post" id="form_message">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+							<label class='langue pull-left'>Voulez-vous rester anonyme?</label>
+							<select class="form-control form-group" name="anonymat">
+								<option value='n'>Non</option>
+								<option value='o'>Oui</option>
+							</select>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+							<label class='langue pull-left'>A qui envoyez-vous ce message? </label>
+							<select class="form-control form-group listepays" name="nom_dest">
+								<option value='Loginfo'>Loginfo</option>
+								<option value='Entreprise'>Entreprise</option>
+							</select>
+						</div>
+						<div class="form-group shadow-textarea">
+						  <textarea class="form-control z-depth-1 textareafr" name="libelle" style="color:#008080" id="exampleFormControlTextarea6" rows="3" placeholder="Ecrivez ici..."></textarea>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+							<button type ="submit" class="btn btn-success form-control langue"><span class="glyphicon glyphicon-ok-sign"></span> Envoyer</button>
+						</div>
+					</form>
+				</div>

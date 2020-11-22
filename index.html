@@ -1,0 +1,378 @@
+ <!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<meta charset="utf-8">
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bootstrap/css/style.css">
+        <title>Loginfo</title>
+    </head>
+    <body>
+		<div style='display:none' id='masquepage'></div>
+		<div style='display:none' id='masquepage2'></div>
+		<div id="mesvues" style="position:relative">
+			<div id='afficheload' style='display:none'></div>
+			<div id='afficheparametre' style='display:none' name='afficheparametre'>
+				<br><div class="parametre input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" name='compte'>
+					<span><span class="pull-left glyphicon glyphicon-user col-xs-2 col-sm-2 col-md-2 col-lg-2" style='color:blue;display:inline-block'></span> <span class='col-xs-8 col-sm-8 col-md-8 col-lg-8 langue' style='display:inline-block'>Compte</span></span>
+				</div>
+				<div class="parametre input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" name='deconnexion'>
+					<span><span class="glyphicon glyphicon-off col-xs-2 col-sm-2 col-md-2 col-lg-2" style='color:red'></span> <span class='col-xs-8 col-sm-8 col-md-8 col-lg-8 langue'>Déconnexion</span></span>
+				</div>
+				<div class="parametre input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" name='desinscription'>
+					<span><a style='color:black' href="mailto:?to=boreltagant@gmail.com&subject=desinscription&body=desinscription"><span class="glyphicon glyphicon-remove col-xs-2 col-sm-2 col-md-2 col-lg-2" style='color:red'></span><span class='col-xs-6 col-sm-6 col-md-6 col-lg-6 langue'>Désinscription</span></a></span>
+				</div>
+				<div style='display:none' id='mon_acces' class="parametre input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group" name='mon_acces'>
+					<span><a style='color:black' href="mailto:?to=boreltagant@gmail.com&subject=desinscription&body=desinscription"><span class="glyphicon glyphicon-lock col-xs-2 col-sm-2 col-md-2 col-lg-2" style='color:green'></span><span class='col-xs-6 col-sm-6 col-md-6 col-lg-6 langue'>Mon_acces</span></a></span>
+				</div>
+			</div>
+			<header>
+				<div id='couleurentete'>
+					<span style='display:inline-block;position:absolute;left:5%;top:35%;color:white;'>Loginfo</span>
+					<span id='btnparametre' class='pull-right' style='display:inline-block;position:absolute;right:5%;top:35%;color:white'><img src='images/troispoints2.png'></span> <!-- https://icones8.fr/icons/set/3-points -->
+				</div>
+				<div id='entetedrapeau'>
+					<img src='' alt='drapeau du Cameroun' id='imagedudrapeau' class='img-responsive img-Thumbnail' height='25%' width='25%'>
+				</div>
+				<div id='enteteenveloppe'>
+					<!-- <div style="display:inline-block;margin-right:3%;cursor:pointer" id='boutonmsg'><img  src='images/enveloppe.jpg' style='color:#eaee56;display:inline-block' height='12%' width='12%'><span class="badge" id='nbremsg' style="background-color:green;display:inline-block"></span></div> -->
+					<select id='languess' style="display:inline-block">
+						<option class='translate' value='fr'>fr</option>
+						<option class='translate' value='en'>en</option>
+					</select>
+				</div>
+			</header>
+			<section>
+				<div id="alerteur" style="display:none" class="alert alert-success fade in col-xs-4 col-sm-4 col-md-4 col-lg-4"><img src="images/gifok2.gif" height="50%" width="50%">SUCCESS</div>
+				<div id="contenu"></div>
+					
+				
+					
+				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" id="mode_paiement" style="display:none">
+					<button type='button' style='background-color:red' id='suppcadrepaiement' class='pull-right'><span class="glyphicon glyphicon-remove glyphicon-red"></span></button>
+					<h4 style='color:black'><center>Mode d'envoi</center></h4>
+					<div id='mode_paiement_conteneur'>
+						<!-- <img src='images/logomtn_paiement.png' height='100%' width='100%'> -->
+						<!-- <h5 id='mtn'><center><img src='images/logomtn_paiement.png' height='10%' width='10%'>   MTN mobile money</center></h5> -->
+						<!-- <h5 id='orange'><center><img src='images/logoorange_paiement.jpg' height='18%' width='18%'>Orange money</center></h5> -->
+					</div>
+				</div>
+				<div class="modal fade" data-backdrop='false' id='modalmessage'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h3 class="modal-title">
+								<center>Messages</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h3>
+						  </div>
+						  <div class="modal-body" id="affichemesmsg">
+							<!-- <div style='text-align:center' class="form-group"> -->
+								<!-- <h4 class='alert alert-success'>Pièce trouvée</h4> -->
+								<!-- <p>Nom: TAGANT<br>Prénom: Franck<br>Date: 12-05-1854<br>Numéro possesseur de la pièce: <strong>ce numéro se trouve dans la liste des pièces retrouvées</strong><p><span style='color:red'>Attention</span>: Rassurez-vous d'etre en possession de votre pièce avant de cliquer sur Recu et si pour une raison quelconque vous ne parvenez pas à obtenir votre pièce cliquer sur Non recu et 2500 vous seront rendu.<br><button class='btn btn-warning pull-left' style='display:inline-block'>Non recu</button><button class='btn btn-success pull-right' style='display:inline-block'>Recu</button><br></p></p> -->
+								<!-- <hr> -->
+							<!-- </div> -->
+						  </div>
+						</div>
+				  </div>
+				</div>
+				<div class="modal fade" data-backdrop='false' id='modalcompte' name='modalcompte'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h3 class="modal-title">
+								<center class='langue'>Informations personnelles</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h3>
+						  </div>
+						  <div class="modal-body" id="affichecompte">
+								<form action ="#" data-url="https://www.findtagant.online/loginfo_doc/controleur/compte.php" method="post" id="form_compte">
+									<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<span class="input-group-addon"><span class='langue'>Nom:</span></span>
+										<input type="text" class="form-control inputfr" name="nom" placeholder="votre nom" minlength="2" required>
+									</div>
+									<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<span class="input-group-addon"><span class='langue'>Prénom:</span></span>
+										<input type="text" class="form-control inputfr" name="prenom" placeholder="votre prenom" minlength="2" required>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<label class='langue pull-left'>Pour quel entreprise travaillez-vous? <span class="obligatoire">*</span></label>
+										<select class="form-control form-group listepays" name="ep_num" required>
+											<option>ID LOGISTICS</option>
+										</select>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<label class='langue pull-left'>A quel tranche horaire appartenez-vous ?</label>
+										<select class="form-control form-group tranche_horaire" name="periode">
+											<option value='matin'>Matin</option>
+											<option value='soir'>Soir</option>
+											<option value='apres-midi'>Apres-midi</option>
+										</select>
+									</div>
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<label class='langue pull-left'>Dans quel zone travaillez-vous ?</label>
+										<select class="form-control form-group" name="zone">
+											<option value='202'>202</option>
+											<option value='211'>211</option>
+											<option value='208'>208</option>
+										</select>
+									</div>
+									<button type ="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> <span class='langue'> Modifier</span></button>
+									<input type="reset" class="reseteur" style="display:none" name='reinitialise'>
+								</form>
+							
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				
+				
+				<div class="modal fade" data-backdrop='false' id='modal_message_cible' name='modal_message_cible'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="modal-title">
+								<center class='langue'>Ciblage</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="affiche_message_cible">
+								<form action ="#" data-url="https://findtagant.online/controleur/compte.php" method="post" id="form_message_cible">
+									<div class="row input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<fieldset class='form-group'>
+											<legend><h5><center>Période de travail de la cible</center></h5></legend>
+											<div style='margin-left:20%' class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+												<label  class=''><input type='checkbox'/> Matin</label>
+												<label style='margin-left:5%' class=''><input type='checkbox'/> Après-midi</label>
+												<label style='margin-left:5%' class=''><input type='checkbox'/> Soir</label>
+											</div>
+										</fieldset>
+										<fieldset>
+											<legend><h5><center>Zone de travail de la cible</center></h5></legend>
+											<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+												<label style='margin-right:30%' class=''><input type='checkbox'/> Zones fruits et légumes</label><br>
+												<label style='margin-right:10%'class=''><input type='checkbox'/> Zone 202</label>
+												<label style='margin-right:10%' style='margin-right:50%' class=''><input type='checkbox'/> Zone 211</label>
+												<label style='margin-right:10%' class=''><input type='checkbox'/> Zone 208</label>
+											</div>
+										</fieldset>
+									</div>
+									<center><button type ="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> <span class='langue'> Ok</span></button></center>
+									<input type="reset" class="reseteur" style="display:none" name='reinitialise'>
+								</form>
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				
+				<div class="modal fade" data-backdrop='false' id='modal_diffusion' name='modal_diffusion'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="modal-title">
+								<center class='langue'>Diffuser un message</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="affiche_diffusion">
+								<form action ="" method="post" data-url='https://www.findtagant.online/loginfo_doc/controleur/diffusion.php' id="form_diffusion">
+									<div class="row input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+										<fieldset class='form-group'>
+											<legend><h5><center>Période de travail de la cible</center></h5></legend>
+											<div style='margin-left:20%' class='col-xs-8 col-sm-8 col-md-8 col-lg-8'>
+												<label  class=''><input type='checkbox' name='matin'/> Matin</label>
+												<label style='margin-left:5%' class=''><input type='checkbox' name='apres-midi'/> Après-midi</label>
+												<label style='margin-left:5%' class=''><input type='checkbox' name='soir'/> Soir</label>
+											</div>
+										</fieldset>
+										<fieldset class='form-group'>
+											<legend><h5><center>Zone de travail de la cible</center></h5></legend>
+											<div class='col-xs-12 col-sm-12 col-md-12 col-lg-12'>
+												<label style='margin-right:30%' class=''><input type='checkbox' name='fruit_legume'/> Zones fruits et légumes</label><br>
+												<label style='margin-right:10%'class=''><input type='checkbox' name='202'/> Zone 202</label>
+												<label style='margin-right:10%' style='margin-right:50%' class=''><input type='checkbox' name='211'/> Zone 211</label>
+												<label style='margin-right:10%' class=''><input type='checkbox' name='208'/> Zone 208</label>
+											</div>
+										</fieldset>
+										<fieldset class='form-group'>
+											<legend><h5><center>Contenu du message</center></h5></legend>
+											<div class="form-group shadow-textarea">
+											  <textarea class="form-control z-depth-1 textareafr" name="message_diffusion" style="color:#008080" id="msg_diffusion" rows="6" placeholder="Ecrivez ici..."></textarea>
+											</div>
+										</fieldset>
+									</div>
+									<center><button type ="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> <span class='langue'> Envoyer</span></button></center>
+									<input type="reset" class="reseteur" style="display:none" name='reinitialise'>
+								</form>
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				
+				<div class="modal fade" data-backdrop='false' id='modal_affiche_messages' name='modal_affiche_messages'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h6 class="modal-title">
+								<center class='langue'>Messages recus</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h6>
+						  </div>
+						  <div class="modal-body" id="corps_affiche_messages">
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				<div class="modal fade" data-backdrop='false' id='affiche_mois_heures' name='affiche_lesmois_heures'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="modal-title">
+								<center class='langue'>Mes heures enregistrées</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="corps_affiche_mois_heures"></div>
+						</div>
+				  </div>
+				</div>
+				
+				
+				
+				<div class="modal fade" data-backdrop='false' id='affiche_mon_acces' name='affiche_mon_acces'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="modal-title">
+								<center class='langue'>Messages du personnelle</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="corps_affiche_mon_acces"> </div>
+						</div>
+				  </div>
+				</div>
+				<div class="modal fade" data-backdrop='false' id='modal_menu' name='modal_menu'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="alert alert-warning modal-title">
+								<center class='langue'>Modifier le menu</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="corps_menu"> 
+							<form action ="" method="post">
+							  <fieldset>
+								<legend style="color:#e58e26"><center>Repas</center></legend>
+								<div id='legend_repas'>Aucun repas enregistré</div>
+								<center><button type ="submit" class="btn_ajout_menu btn btn-info" name='repas'>
+									<span class="glyphicon glyphicon-plus"></span> 
+									<span class='langue'>Ajouter</span>
+								</button></center>
+							  </fieldset><br><br>
+							</form>
+							<form action ="" method="post">
+							  <fieldset>
+								<legend style="color:#e58e26"><center>Boissons</center></legend>
+								<div id='legend_boissons'>Aucune boisson enregistrée</div>
+								<center><button type ="submit" class="btn_ajout_menu btn btn-info" name='boissons'>
+									<span class="glyphicon glyphicon-plus"></span> 
+									<span class='langue'>Ajouter</span>
+								</button></center>
+							  </fieldset><br><br>
+							</form>
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				
+				<div class="modal fade" data-backdrop='false' id='modal_commandes' name='modal_commandes'>
+				  <div class="modal-dialog modal-xs">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h4 class="alert alert-warning modal-title">
+								<center class='langue'>Les commandes</center>
+								<button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove" style='color:red'></span></button>
+							</h4>
+						  </div>
+						  <div class="modal-body" id="corps_menu"> 
+							<form action ="" method="post">
+							  <fieldset>
+								<legend style="color:#e58e26"><center>Repas commandés</center></legend>
+								<table class="table table-striped table-condensed">
+									<thead>
+										<th></th>
+										<th></th>
+									</thead>	
+									<tbody id='corps_tableau_commande_repas'>
+										<tr><td>Aucune commande passée</td></tr>
+									</tbody>
+								</table>
+							  </fieldset><br><br>
+							</form>
+							<form action ="" method="post">
+							  <fieldset>
+								<legend style="color:#e58e26"><center>Boissons commandées</center></legend>
+								<table class="table table-striped table-condensed">
+									<thead>
+										<th></th>
+										<th></th>
+									</thead>	
+									<tbody id='corps_tableau_commande_boissons'>
+										<tr><td>Aucune commande passée</td></tr>
+									</tbody>
+								</table>
+							  </fieldset><br><br>
+							</form>
+						  </div>
+						</div>
+				  </div>
+				</div>
+				
+				
+			</section>
+		</div>
+		<script src="cordova.js"></script>
+		<script src="js/jquery.js"></script>
+		<script src="bootstrap/js/bootstrap.js"></script>
+		<script src="js/tagant_plugin_manager.js"></script>
+		<script src="js/gerepremierformulaire.js"></script>
+		<script src="js/index.js"></script>
+    </body>
+</html>

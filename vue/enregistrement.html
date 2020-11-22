@@ -1,0 +1,64 @@
+				<div name='enregistrement' class="panel panel-primary col-xs-12 col-lg-12 col-sm-12 col-md-12">
+					<div class="panel-heading">
+						<h4><center><span class='langue'>Enregistrement</span></br><span style="font-size:0.6em" class='langue'>Les elements suivi de * sont obligatoires</span></center></h4>
+					</div>
+					<div class="panel-body">
+						<form action ="" data-url="https://www.findtagant.online/loginfo_doc/controleur/enregistrement.php" method="post" id="form_enregistrement">
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<label class='langue pull-left'>Dans quel boite d'intérim etes vous? </label>
+								<select class="form-control form-group listepays" name="bi_num">
+									<option value='Adequat'>Adequat</option>
+									<option value='Planete'>Planete</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<label class='langue pull-left'>Pour quel entreprise travaillez-vous? <span class="obligatoire">*</span></label>
+								<select class="form-control form-group listepays" name="ep_num" required>
+									<option>ID LOGISTICS</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<label class='langue pull-left'>A quel tranche horaire appartenez-vous ?</label>
+								<select class="form-control form-group tranche_horaire" name="periode">
+									<option value='matin'>Matin</option>
+									<option value='soir'>Soir</option>
+									<option value='apres-midi'>Apres-midi</option>
+								</select>
+							</div>
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<label class='langue pull-left'>Dans quel zone travaillez-vous ?</label>
+								<select class="form-control form-group" name="zone">
+									<option value='202'>202</option>
+									<option value='211'>211</option>
+									<option value='208'>208</option>
+								</select>
+							</div>
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Nom: </span><span class="obligatoire">*</span></span>
+								<input type="text" class="form-control inputfr" name="nom" placeholder="votre nom" minlength="2" required>
+							</div>
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Prénom: </span><span class="obligatoire">*</span></span>
+								<input type="text" class="form-control inputfr" name="prenom" placeholder="votre prenom" minlength="2" required>
+							</div>
+
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Tel </span><span class="obligatoire">*</span>:</span>
+								<input type="tel" class="form-control" name="tel" required>
+							</div>
+
+							<div id="inputsexe" class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Sexe </span><span class="obligatoire">*</span>:</span>
+								<div class="col-xs-6 col-sm-6 col-md-6"><label >Femme:<input id='sexefemme' type="radio" class="" name="sexe" value="f"></label></div>
+								<div class="col-xs-6 col-sm-6 col-md-6"><label >Homme:<input id='sexehomme' type="radio" class="" name="sexe" value="h"></label></div>
+							</div>
+
+							<div class="input-group col-xs-12 col-sm-12 col-md-12 col-lg-12 form-group">
+								<span class="input-group-addon"><span class='langue'>Mot de passe </span><span class="obligatoire">*</span>:</span>
+								<input type="password" class="form-control" name="mdp" required>
+							</div>
+							<button type ="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> <span class='langue'>s'enregistrer</span></button>
+							<input type="reset" class="reseteur" style="display:none">
+						</form>
+					</div>
+				</div>
